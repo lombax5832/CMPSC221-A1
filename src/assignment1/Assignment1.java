@@ -7,7 +7,7 @@ package assignment1;
 
 /**
  *
- * @author aps5601
+ * @author Alexei Snytkine
  */
 public class Assignment1 {
 
@@ -15,7 +15,23 @@ public class Assignment1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-    }
+        SavingsAccount account1 = new SavingsAccount(2000.00);
+        SavingsAccount account2 = new SavingsAccount(3000.00);
+        
+        SavingsAccount.setAnnualInterestRate(0.04);
+        
+        
+        
+        for(int i = 1; i < 13; i++){
+            
+            account1.calculateMonthlyInterest();
+            account2.calculateMonthlyInterest();
+        
+            System.out.printf("%-7d%10s%10s", i, 
+                    account1.getBalanceString(), 
+                    account2.getBalanceString());
+            
+        }
+    }   
     
 }
