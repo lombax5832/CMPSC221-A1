@@ -6,6 +6,7 @@
 package assignment1;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.NumberFormat;
 
 /**
@@ -30,22 +31,23 @@ public class SavingsAccount {
      */
     public void calculateMonthlyInterest() {
         addSavingsBalance(getSavingsBalance().
-                multiply(annualInterestRate.divide(BigDecimal.valueOf(12.0))));
+                multiply(annualInterestRate.divide(
+                        BigDecimal.valueOf(12.0), 10, RoundingMode.HALF_UP)));
     }
 
     /**
      * Converts toAdd to BigDecimal then use:<br>
      * {@link addSavingsBalance(BigDecimal)}
-     * 
+     *
      * @param toAdd balance to add to savingsBalance
      */
     public void addSavingsBalance(double toAdd) {
         addSavingsBalance(BigDecimal.valueOf(toAdd));
     }
-    
+
     /**
      * Add a BigDecimal value to savingsBalance
-     * 
+     *
      * @param toAdd balance to add to savingsBalance
      */
     public void addSavingsBalance(BigDecimal toAdd) {
@@ -55,17 +57,17 @@ public class SavingsAccount {
     /**
      * Converts newRate to BigDecimal then use:<br>
      * {@link setAnnualInterestRate(BigDecimal)}
-     * 
+     *
      * @param newRate new annual interest rate
      */
     public static void setAnnualInterestRate(double newRate) {
         setAnnualInterestRate(BigDecimal.valueOf(newRate));
     }
-    
+
     /**
      * @param newRate new annual interest rate
      */
-    public static void setAnnualInterestRate(BigDecimal newRate){
+    public static void setAnnualInterestRate(BigDecimal newRate) {
         annualInterestRate = newRate;
     }
 
@@ -73,7 +75,7 @@ public class SavingsAccount {
      * @return the savingsBalance
      */
     public BigDecimal getSavingsBalance() {
-        return annualInterestRate;
+        return savingsBalance;
     }
 
     /**
@@ -82,20 +84,24 @@ public class SavingsAccount {
     public void setSavingsBalance(double savingsBalance) {
         setSavingsBalance(BigDecimal.valueOf(savingsBalance));
     }
-    
+
     /**
-     * 
+     *
      * @param savingsBalance the savingsBalance to set
      */
-    public void setSavingsBalance(BigDecimal savingsBalance){
+    public void setSavingsBalance(BigDecimal savingsBalance) {
         this.savingsBalance = savingsBalance;
     }
-    
+
     /**
-     * 
+     *
      * @return Balance as a string
      */
-    public String getBalanceString(){
+    public String getBalanceString() {
         return NumberFormat.getCurrencyInstance().format(savingsBalance);
+    }
+    
+    public static String getAnnualInterestRateString() {
+        return NumberFormat.getNumberInstance().format(annualInterestRate);
     }
 }
