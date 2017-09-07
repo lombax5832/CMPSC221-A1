@@ -104,7 +104,7 @@ public class SavingsAccount {
      * @return Balance as a string
      */
     public String getBalanceString() {
-        return NumberFormat.getCurrencyInstance().format(savingsBalance);
+        return savingsBalance.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString();
     }
     
     public static String getAnnualInterestRateString() {
@@ -124,10 +124,11 @@ public class SavingsAccount {
         SavingsAccount.setAnnualInterestRate(0.04);
         
         //Format table header
-        System.out.printf("%-7s%15s%15s%n",
+        System.out.printf("%s%n%-5s%13s%10s%n",
+                "Savings Account Balances",
                 "Month", 
-                "Account1", 
-                "Account2");
+                "Saver1", 
+                "Saver2");
         
         int i;
         
@@ -136,7 +137,7 @@ public class SavingsAccount {
             account1.calculateMonthlyInterest();
             account2.calculateMonthlyInterest();
             
-            System.out.printf("%-7d%15s%15s%n", i, 
+            System.out.printf("%-5d%13s%10s%n", i, 
                     account1.getBalanceString(), 
                     account2.getBalanceString());
             
@@ -149,7 +150,7 @@ public class SavingsAccount {
         account1.calculateMonthlyInterest();
         account2.calculateMonthlyInterest();
         
-        System.out.printf("%-7d%15s%15s\n", i, 
+        System.out.printf("%-5d%13s%10s%n", i, 
                     account1.getBalanceString(), 
                     account2.getBalanceString());
         
